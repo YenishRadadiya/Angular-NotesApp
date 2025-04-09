@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 
+export enum note_status {
+  DEFAULT,
+  NEW,
+  UPDATED,
+  DELETED
+}
 export type Note = {
   id: number;
   title: string;
   content: string;
   created_at: Date;
-  status: boolean;
+  status: note_status;
 };
 
 @Injectable({
@@ -22,35 +28,35 @@ export class BookService {
         title: 'Welcome Note',
         content: 'This is a welcome note to get you started.',
         created_at: new Date(),
-        status: false,
+        status: note_status.DEFAULT,
       },
       {
         id: 2,
         title: 'Meeting Notes',
         content: 'Team sync meeting on Monday at 10 AM.',
         created_at: new Date(),
-        status: false,
+        status: note_status.DEFAULT,
       },
       {
         id: 3,
         title: 'To-do List',
         content: '1. Grocery shopping\n2. Finish assignment\n3. Call plumber',
         created_at: new Date(),
-        status: false,
+        status: note_status.DEFAULT,
       },
       {
         id: 4,
         title: 'Angular Tips',
         content: 'Use services for data logic and keep components clean.',
         created_at: new Date(),
-        status: false,
+        status: note_status.DEFAULT,
       },
       {
         id: 5,
         title: 'Project Ideas',
         content: '1. Note taking app\n2. Task manager\n3. Budget planner',
         created_at: new Date(),
-        status: false,
+        status: note_status.DEFAULT,
       },
     ];
   }
@@ -75,13 +81,6 @@ export class BookService {
     const index = this.notes.findIndex(n => n.id === note.id);
     if (index !== -1) {
       this.notes[index] = note;
-    }
-  }
-
-  toggleStatus(id: number): void {
-    const note = this.getNoteById(id);
-    if (note) {
-      note.status = !note.status;
     }
   }
 }
